@@ -39,6 +39,38 @@ module LinkedIn
       get(path, options)
     end
 
+    # @!macro multi_profile_options
+    #   @options opts [Array]  :urls A list of profile urls
+    #   @options opts [Array]  :ids List of LinkedIn IDs
+    #
+    # @!macro new profile_args
+    #   @overload profile()
+    #     Fetches your own profile
+    #   @overload profile(id_or_url, opts)
+    #     Fetches the profile of another user
+    #     @param [String] id_or_url a LinkedIn id or a profile URL
+    #     @param [Hash] opts more profile options
+    #     @macro profile_options
+    #   @overload profile(opts)
+    #     Fetches the profile of another user
+    #     @param [Hash] opts profile options
+    #     @macro profile_options
+    #   @return [LinkedIn::Mash]
+
+    # Retrieve a member's LinkedIn profile.
+    #
+    # Required permissions: r_basicprofile, r_fullprofile, r_emailadress
+    #
+    # @see http://developer.linkedin.com/documents/profile-api
+    # @macro profile_args
+    # @macro multi_profile_options
+    def profile_with_email(id={}, options={})
+      options = parse_id(id, options)
+      attributes = %w(id email-address last-name first-name)
+      path = profile_with_attributes_path(options, attributes)
+      get(path, options)
+    end
+
     # Retrieve a list of 1st degree connections for a user who has
     # granted access to his/her account
     #

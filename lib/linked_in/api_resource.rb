@@ -134,6 +134,12 @@ module LinkedIn
       end
     end
 
+    def profile_with_attributes_path(options={}, attributes = [])
+      path = profile_path(options, false)
+      path += ":(#{attributes.join(',')})" if attributes.size > 0
+      path
+    end
+
     def single_person_path(id=nil, url=nil)
       if id
         return "/id=#{id}"

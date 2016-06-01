@@ -21,6 +21,7 @@ module LinkedIn
                            :add_job_bookmark
 
     def_delegators :@people, :profile,
+                             :profile_with_email,
                              :skills,
                              :connections,
                              :picture_urls,
